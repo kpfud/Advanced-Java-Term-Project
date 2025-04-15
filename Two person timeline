@@ -1,0 +1,35 @@
+Timeline: Library Management System - 2 Person Team
+---------------------------------------------------
+
+Week 1 (April 15 – April 21)
+✔ Project setup
+   - Create GitHub repo, .gitignore, README, project board
+   - Choose interface type (CLI or GUI)
+   - Assign roles and agree on workflow
+✔ Phase 1 - Models
+   - Implement Book.java
+   - Implement Borrower.java
+
+Week 2 (April 22 – April 25)
+✔ Phase 2 - Services
+   - Implement LibraryService.java
+     * addBook(), editBook(), deleteBook()
+     * addBorrower(), deleteBorrower()
+     * borrowBook(), returnBook(), searchBook(), filterByAvailability()
+✔ Phase 3 - File Handling
+   - Create FileHandler.java
+   - Implement reading/writing books.txt and borrowers.txt
+
+April 26 (Friday)
+✔ Phase 4 - Interface
+   - Complete CLI or GUI interface
+   - Integrate with LibraryService
+
+April 27 (Saturday)
+✔ Testing & Polish
+   - Full functionality test
+   - Fix bugs and improve code readability
+   - Record and finalize demo video
+
+April 28 (Sunday - DUE)
+✔ Submit project and video demo
