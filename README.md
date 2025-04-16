@@ -19,7 +19,7 @@ A Java project for managing books, borrowers, and lending transactions
 
 ## Team Members
 - Katelyn Pfundstein
-- Caleb
+- Caleb Westerman
 
 ## Due Date
 - April 28, 2025
