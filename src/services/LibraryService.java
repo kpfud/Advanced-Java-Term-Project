@@ -87,7 +87,7 @@ public class LibraryService {
         System.out.print("Enter the ID of the book to delete: ");
         String id = keyboard.nextLine().trim();
 
-        Book bootToDelete = null;
+        Book bookToDelete = null;
 
         for (Book b : books) {
             if (b.getID().equalsIgnoreCase(id)) {
