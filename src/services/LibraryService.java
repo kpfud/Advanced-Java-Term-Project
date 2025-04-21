@@ -11,7 +11,7 @@ public class LibraryService {
     }
 
     //---- Book related methods ----
-    public void addBook(Book book) {
+    public void addBook() {
         Scanner keyboard = new Scanner(System.in);
 
         System.out.println("=== Add New Book ===");
@@ -34,7 +34,7 @@ public class LibraryService {
         System.out.println("Book added successfully!");
     }
 
-    public void editBook(Book book) {
+    public void editBook() {
         Scanner keyboard = new Scanner(System.in);
 
         System.out.println("=== Edit Book ===");
@@ -79,7 +79,7 @@ public class LibraryService {
         System.out.println("Book updated successfully!");
     }
 
-    public void deleteBook(Book book) {
+    public void deleteBook() {
         Scanner keyboard = new Scanner(System.in);
 
         System.out.println("=== Delete Book ===");
@@ -87,7 +87,7 @@ public class LibraryService {
         System.out.print("Enter the ID of the book to delete: ");
         String id = keyboard.nextLine().trim();
 
-        Book bootToDelete = null;
+        Book bookToDelete = null;
 
         for (Book b : books) {
             if (b.getID().equalsIgnoreCase(id)) {
@@ -124,11 +124,15 @@ public class LibraryService {
     }
 
     //---- Borrower related methods -----
-    public void addBorrower(Borrower borrower) {
+    public void addBorrower() {
         //adds borrowers to list
     }
 
-    public void deleteBorrower(Borrower borrower) {
+    public void editBorrower() {
+        //edit existing borrower
+    }
+
+    public void deleteBorrower() {
         //removes borrowers from list
     }
 

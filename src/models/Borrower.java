@@ -22,7 +22,7 @@ public class Borrower {
 
     @Override
     public String toString() {
-        return "Name: " + name + "\nEmail: " email + "\nPhone" + phoneNum +
+        return "Name: " + name + "\nEmail: " + email + "\nPhone" + phoneNum +
                 "\nBorrowed Books: " + borrowedBooks.size();
     }
 }
