@@ -1,7 +1,7 @@
 public class Borrower {
     private String id;
     private String name;
-    Private String email;
+    private String email;
     private String phoneNum;
     private List<Book> borrowedBooks = new ArrayList<>();
 
@@ -11,6 +11,21 @@ public class Borrower {
         this.email = email;
         this.phoneNum = phoneNum;
     }
+
+    //Getters and Setters
+    public String getID() { return id; }
+
+    public String getName() { return name; }
+
+    public String getEmail() { return email; }
+
+    public String getPhoneNum() { return phoneNum; }
+
+    public void setName() { this.name = name; }
+
+    public void setEmail() { this.email = email; }
+
+    public void setPhoneNum() { this.phoneNum = phoneNum; }
  
     public void borrowBook(Book book) {
         borrowedBooks.add(book);
