@@ -251,10 +251,104 @@ public class LibraryService {
 
     //---- Book borrowing methods ----
     public void borrowBook(Book book, Borrower borrower) {
-        //calls book.borrowBook() and borrower.borrowBook()
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("=== Borrow Book ===");
+
+        //Get borrower ID
+        System.out.print("Enter Borrower ID: ");
+        String borrowerID = keyboard.nextLine().trim();
+
+        //Find borrower
+        Borrower borrower = null;
+        for (Borrower b : borrowers) {
+            if (b.getID.equalsIgnoreCase(borrowerID)) {
+                borrower = b;
+                break;
+            }
+        }
+        
+
+        if (borrower == null) {
+            System.out.println("Borrower not found.");
+            return;
+        }
+
+        // Get book ID
+        System.out.print("Enter Book ID to borrow: ");
+        String bookID = keyboard.nextLine().trim();
+
+        //Find book
+        Book bookToBorrow = null;
+        for (Book book : books) {
+            if (book.getID().equalsIgnoreCase(bookID)) {
+                bookToBorrow = book;
+                break;
+            }
+        }
+
+        if (bookToBorrow == null) {
+            System.out.println("Book not found.");
+            return;
+        }
+
+        if (!bookToBorrow.isAvailable()) {
+            System.out.println("Sorry, this book is checked out.");
+            return;
+        }
+
+        //Borrow the book
+        bookToBorrow.borrowBook();
+        borrower.borrowBook(bookToBorrow);
+
+        System.out.println("Book borrowed successfully!");
     }
 
+    
+
     public void returnBook(Book book, Borrower borrower){
-        // calls book.returnBook() and borrower.returnBook()
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("=== Return Book ===");
+
+        // Get borrower ID
+        System.out.print("Enter borrower ID: ");
+        String borrowerID = keyboard.nextLine().trim();
+
+        //Find borrower
+        Borrower borrower = null;
+        for (Borrower b : borrowers) {
+            if (b.getID().equalsIgnoreCase(borrowerID)) {
+                borrower = b;
+                break;
+            }
+        }
+
+        if (borrower == null) {
+            System.out.println("Borrower not found.");
+            return;
+        }
+
+        //Get book ID
+        System.out.print("Enter Book ID to return: ");
+        String bookID = keyboard.nextLine().trim();
+
+        //Find the book in the borrower's list
+        Book bookToReturn = null;
+        for (Book book: borrower.getBorrowedBooks()) {
+            if (book.getID().equalsIgnoreCase(bookID)) {
+                bookToReturn = book;
+                break;
+            }
+        }
+
+        if (bookToReturn == null) {
+            System.out.println("This borrower did not borrow that book.");
+            return;
+        }
+
+        //Return the book
+        bookToReturn.returnBook();
+        borrower.returnBook(bookToReturn);
+
+        System.out.println("Book returned successfully!")
     }
 }
