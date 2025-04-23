@@ -1,10 +1,18 @@
+package services;
+
+import models.Book;
+import models.Borrower;
+
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class LibraryService {
     //Assume lists to store current books and borrowers
     private List<Book> books = new ArrayList<>();
     private List<Borrower> borrowers = new ArrayList<>();
     private int nextBookID = 1;
+    static Scanner keyboard = new Scanner(System.in);
 
     private String generateBookID() {
         return "B" + String.format("%03d", nextBookID++);
@@ -12,8 +20,6 @@ public class LibraryService {
 
     //---- Book related methods ----
     public void addBook() {
-        Scanner keyboard = new Scanner(System.in);
-
         System.out.println("=== Add New Book ===");
 
         String id = generateBookID();   // Auto-generate ID
@@ -35,8 +41,6 @@ public class LibraryService {
     }
 
     public void editBook() {
-        Scanner keyboard = new Scanner(System.in);
-
         System.out.println("=== Edit Book ===");
 
         System.out.print("Enter the ID of the book to edit: ");
@@ -67,7 +71,7 @@ public class LibraryService {
         System.out.print("Enter new author (leave blank to keep current): ");
         String newAuthor = keyboard.nextLine().trim();
         if (!newAuthor.isEmpty()) {
-            bookToEdit.setAuthor(newTitle);
+            bookToEdit.setAuthor(newAuthor);
         }
 
         System.out.print("Enter new genre (leave blank to keep current: )");
@@ -80,8 +84,6 @@ public class LibraryService {
     }
 
     public void deleteBook() {
-        Scanner keyboard = new Scanner(System.in);
-
         System.out.println("=== Delete Book ===");
         
         System.out.print("Enter the ID of the book to delete: ");
@@ -129,8 +131,6 @@ public class LibraryService {
     }
 
     public void addBorrower() {
-        Scanner keyboard = new Scanner(System.in);
-
         System.out.println("=== Add Borrower ===");
 
         //Generate a unique borrower ID (similar to the book ID)
@@ -153,8 +153,6 @@ public class LibraryService {
     }
 
     public void editBorrower() {
-        Scanner keyboard = new Scanner(System.in);
-
         System.out.println("=== Edit Borrower ===");
 
         System.out.print("Enter the ID of the borrower to edit: ");
@@ -171,13 +169,13 @@ public class LibraryService {
         }
 
         if (borrowerToEdit == null) {
-            system.out.println("Borrower with ID " + borrowerID + " not found.");
+            System.out.println("Borrower with ID " + borrowerID + " not found.");
             return;
         }
 
         //Display current borrower info
         System.out.println("Current Borrower Information:");
-        System.out.println("Name: " + borrowerToEdit(getName());
+        System.out.println("Name: " + borrowerToEdit.getName());
         System.out.println("Email: " + borrowerToEdit.getEmail());
         System.out.println("Phone Number: " + borrowerToEdit.getPhoneNum());
 
@@ -188,6 +186,7 @@ public class LibraryService {
         System.out.println("3. Phone Number");
         System.out.print("Enter the number corresponding to the field: ");
         int choice = keyboard.nextInt();
+        keyboard.nextLine();
 
         switch (choice) {
             case 1:
@@ -205,6 +204,7 @@ public class LibraryService {
             case 3:
                 System.out.print("Enter new phone number: ");
                 String newPhoneNum = keyboard.nextLine().trim();
+                borrowerToEdit.setPhoneNum(newPhoneNum);
                 System.out.println("Phone number updated successfully.");
                 break;
             default:
@@ -214,8 +214,6 @@ public class LibraryService {
     }
 
     public void deleteBorrower() {
-        Scanner keyboard = new Scanner(System.in);
-
         System.out.println("=== Delete Borrower ===");
 
         System.out.print("Enter the ID of the borrower to delete: ");
@@ -239,7 +237,7 @@ public class LibraryService {
 
         System.out.println("Borrower found: " + borrowerToDelete.getName());
         System.out.print("Are you sure you want to delete this borrower? (y/n): ");
-        String confirm = scanner.nextLine().trim();
+        String confirm = keyboard.nextLine().trim();
 
         if (confirm.equalsIgnoreCase("y")) {
             borrowers.remove(borrowerToDelete);
@@ -250,8 +248,7 @@ public class LibraryService {
     }
 
     //---- Book borrowing methods ----
-    public void borrowBook(Book book, Borrower borrower) {
-        Scanner keyboard = new Scanner(System.in);
+    public void borrowBook() {
         System.out.println("=== Borrow Book ===");
 
         //Get borrower ID
@@ -261,7 +258,7 @@ public class LibraryService {
         //Find borrower
         Borrower borrower = null;
         for (Borrower b : borrowers) {
-            if (b.getID.equalsIgnoreCase(borrowerID)) {
+            if (b.getID().equalsIgnoreCase(borrowerID)) {
                 borrower = b;
                 break;
             }
@@ -279,9 +276,9 @@ public class LibraryService {
 
         //Find book
         Book bookToBorrow = null;
-        for (Book book : books) {
-            if (book.getID().equalsIgnoreCase(bookID)) {
-                bookToBorrow = book;
+        for (Book b : books) {
+            if (b.getID().equalsIgnoreCase(bookID)) {
+                bookToBorrow = b;
                 break;
             }
         }
@@ -305,8 +302,7 @@ public class LibraryService {
 
     
 
-    public void returnBook(Book book, Borrower borrower){
-        Scanner keyboard = new Scanner(System.in);
+    public void returnBook(){
         System.out.println("=== Return Book ===");
 
         // Get borrower ID
@@ -349,6 +345,6 @@ public class LibraryService {
         bookToReturn.returnBook();
         borrower.returnBook(bookToReturn);
 
-        System.out.println("Book returned successfully!")
+        System.out.println("Book returned successfully!");
     }
 }

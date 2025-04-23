@@ -1,3 +1,8 @@
+package models;
+
+import java.util.List;
+import java.util.ArrayList;
+
 public class Borrower {
     private String id;
     private String name;
@@ -21,11 +26,11 @@ public class Borrower {
 
     public String getPhoneNum() { return phoneNum; }
 
-    public void setName() { this.name = name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setEmail() { this.email = email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setPhoneNum() { this.phoneNum = phoneNum; }
+    public void setPhoneNum(String phoneNum) { this.phoneNum = phoneNum; }
  
     public void borrowBook(Book book) {
         borrowedBooks.add(book);

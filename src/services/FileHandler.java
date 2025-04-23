@@ -22,7 +22,7 @@ public class FileHandler {
                 String line = String.join("~",
                     book.getID(),
                     book.getTitle(),
-                    book.getAuthor();
+                    book.getAuthor(),
                     book.getGenre(),
                     String.valueOf(book.isAvailable())
                 );
@@ -37,7 +37,7 @@ public class FileHandler {
 
     public void saveBorrowers(List<Borrower> borrowers) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(BORROWER_FILE))) {
-            For (Borrower borrower : borrowers) {
+            for (Borrower borrower : borrowers) {
                 StringBuilder borrowedBookIDs = new StringBuilder();
                 for (Book book : borrower.getBorrowedBooks()) {
                     borrowedBookIDs.append(book.getID()).append(",");
@@ -45,7 +45,7 @@ public class FileHandler {
 
                 // remove trailing comma
                 if (borrowedBookIDs.length() > 0) {
-                    borrowedBookIDs.deletCharAt(borrowedBookIDs.length() - 1);
+                    borrowedBookIDs.deleteCharAt(borrowedBookIDs.length() - 1);
                 }
 
                 String line = String.join("~",
@@ -90,7 +90,7 @@ public class FileHandler {
         return books;
     }
 
-    public List<Borrower> loadBorrowers() {
+    public List<Borrower> loadBorrowers(List<Book> allBooks) {
         List<Borrower> borrowers = new ArrayList<>();
         
         try (BufferedReader reader = new BufferedReader(new FileReader(BORROWER_FILE))) {
