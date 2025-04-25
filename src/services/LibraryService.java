@@ -154,8 +154,8 @@ public class LibraryService {
             case 2 -> {//Author
                 System.out.println("SEARCHING BY AUTHOR...");
                 for (Book e : books) {
-                    String tempGenre = e.getGenre().toLowerCase(); //lowercase 
-                    if ( tempGenre.contains(key.toLowerCase())) { //check against lowercase key
+                    String tempAuthor = e.getAuthor().toLowerCase(); //lowercase 
+                    if ( tempAuthor.contains(key.toLowerCase())) { //check against lowercase key
                         matchingBooks.add(e); //add all matching books to the arraylist
                     }
                 }
@@ -163,8 +163,8 @@ public class LibraryService {
             case 3 -> {//Genre
                 System.out.println("SEARCHING BY GENRE...");
                 for (Book e : books) {
-                    String tempTitle = e.getTitle().toLowerCase(); //lowercase title
-                    if ( tempTitle.contains(key.toLowerCase())) { //check against lowercase key
+                    String tempGenre = e.getGenre().toLowerCase(); //lowercase title
+                    if ( tempGenre.contains(key.toLowerCase())) { //check against lowercase key
                         matchingBooks.add(e); //add all matching books to the arraylist
                     }
                 }
@@ -356,7 +356,7 @@ public class LibraryService {
             return;
         }
 
-        if (!bookToBorrow.isAvailable()) {
+        if (!bookToBorrow.availableStatus()) {
             System.out.println("Sorry, this book is checked out.");
             return;
         }
