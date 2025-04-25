@@ -17,7 +17,15 @@ public class LibraryService {
     private String generateBookID() {
         return "B" + String.format("%03d", nextBookID++);
     }
-
+    
+    //---- Getters ----
+    public List<Book> getBooks() {
+        return books;
+    }
+    
+    public List<Borrower> getBorrowers() {
+        return borrowers;
+    }
     //---- Book related methods ----
     public void addBook() {
         System.out.println("=== Add New Book ===");
@@ -115,10 +123,70 @@ public class LibraryService {
         }
     }
 
-    public List<Book> searchBooks(String keyword) {
+    public void searchBooks(String key) {
         //returns books matching keyword
-        return new ArrayList<>();
-    }
+        List<Book> matchingBooks = new ArrayList<>();
+
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("You're looking for: '" + key + "'");
+        System.out.println("\nAre you searching for a book title, author, or genre?");
+        System.out.println("0 - Return to Menu\n"
+                + "1 - Search by Title\n"
+                + "2 - Search by Author\n"
+                + "3 - Search by Genre\n");
+        int exit = keyboard.nextInt();
+
+        //case for each possible input
+        switch (exit) {
+            case 0 -> {
+                return;
+            } //just exit
+            case 1 -> {//Title
+                System.out.println("SEARCHING BY TITLE...");
+                for (Book e : books) {
+                    String tempTitle = e.getTitle().toLowerCase(); //lowercase title
+                    if ( tempTitle.contains(key.toLowerCase())) { //check against lowercase key
+                        matchingBooks.add(e); //add all matching books to the arraylist
+                    }
+                }
+            }
+            case 2 -> {//Author
+                System.out.println("SEARCHING BY AUTHOR...");
+                for (Book e : books) {
+                    String tempGenre = e.getGenre().toLowerCase(); //lowercase 
+                    if ( tempGenre.contains(key.toLowerCase())) { //check against lowercase key
+                        matchingBooks.add(e); //add all matching books to the arraylist
+                    }
+                }
+            }
+            case 3 -> {//Genre
+                System.out.println("SEARCHING BY GENRE...");
+                for (Book e : books) {
+                    String tempTitle = e.getTitle().toLowerCase(); //lowercase title
+                    if ( tempTitle.contains(key.toLowerCase())) { //check against lowercase key
+                        matchingBooks.add(e); //add all matching books to the arraylist
+                    }
+                }
+            }
+            default -> { //default returns to menu
+                System.out.println("INVALID INPUT. Aborting search...");
+                return;
+            }
+        }// end switch statement
+        
+        //do nothing if the list is empty 
+        if (matchingBooks.isEmpty()) {
+        System.out.println("\nSorry! No books matching that keyword were found.");
+        }
+        else {//search through and display books
+            System.out.println("\nHere are the books we found: ");
+            for(Book var : matchingBooks) {
+                System.out.println(var); //utilize toString override in Book object
+            }
+        
+        }
+    }// end searchBooks
 
     public List<Book> filterByAvailability() {
         //return only books that aren't being borrowed
@@ -298,7 +366,7 @@ public class LibraryService {
         borrower.borrowBook(bookToBorrow);
 
         System.out.println("Book borrowed successfully!");
-    }
+    }//end borrowbook
 
     
 

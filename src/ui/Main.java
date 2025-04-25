@@ -9,18 +9,15 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("LIBRARY MANAGEMENT SYSTEM");
-
-        //testing things
-        //I plan to make a simple, reusable list to test sorting algorithms
-        //and other features
-        Book testbook = new Book();
-        Borrower testborrow = new Borrower();
+        LibraryService libServe = new LibraryService(); //our library service
+        //contains books and borrowers
+        //will be used throughout system
 
         //user input stuff
         Scanner keyboard = new Scanner(System.in);
         int exit = -1; //exit when user says to
         do {
-            System.out.println("\f" + "Enter a number to select from the menu.");
+            System.out.println("\n\f\nEnter a number to select from the menu.");
             System.out.println("0 - Exit Program\n"
                     + "1 - Add or Edit a Book\n"
                     + "2 - Access or Save to File\n"
@@ -32,22 +29,28 @@ public class Main {
             //case for each possible input
             switch (exit) {
                 case 0 -> {
+                    System.out.println("EXITING...");
                     break;
                 } //just exit
                 case 1 -> {//Add or edit books, call method to get user choices
-                    AlterBooks();
+                    System.out.println("YOU CHOSE TO ADD/EDIT BOOKS...");
+                    AlterBooks(libServe);
                 }
                 case 2 -> {//access or save to file, once again, get user choice
-                    AlterFiles();
+                    System.out.println("YOU CHOSE TO LOAD/SAVE FILES...");
+                    AlterFiles(libServe);
                 }
                 case 3 -> {//search books by title, author, or genre, easiest to get user choice and then search
-                    SearchBooks();
+                    System.out.println("YOU CHOSE TO SEARCH BOOKS...");
+                    SearchBooksMenu(libServe);
                 }
                 case 4 -> {//borrow or return books for borrowers
-                    BorrowedBooks();
+                    System.out.println("YOU CHOSE TO BORROW/RETURN BOOKS...");
+                    BorrowedBooks(libServe);
                 }
                 case 5 -> {//manipulate the list of borrowers
-                    AlterBorrower();
+                    System.out.println("YOU CHOSE TO ADD/EDIT BORROWERS...");
+                    AlterBorrower(libServe);
                 }
                 default -> //default is essentially for invalid input
                     System.out.println("INVALID INPUT. Please enter an integer from 0-5 (inclusive)");
@@ -55,11 +58,9 @@ public class Main {
         } while (!(exit == 0)); //repeat this until user enters '0' to exit
     }
 
-    static void AlterBooks() {//user choice to add, edit, or delete book
+    //should function//
+    static void AlterBooks(LibraryService ls) {//user choice to add, edit, or delete book
         Scanner keyboard = new Scanner(System.in);
-
-        LibraryService ls = new LibraryService(); //needed to reference non-static context
-
         int exit = -1; //exit when user says to
         do {
             System.out.println("\nWould you like to add, edit, or delete a book?");
@@ -75,12 +76,15 @@ public class Main {
                     return;
                 } //just exit
                 case 1 -> {//Add book
+                    System.out.println("ADDING BOOK...");
                     ls.addBook();
                 }
                 case 2 -> {//edit book
+                    System.out.println("EDITING BOOK...");
                     ls.editBook();
                 }
                 case 3 -> {//delete book
+                    System.out.println("DELETING BOOK...");
                     ls.deleteBook();
                 }
                 default -> { //default is essentially for invalid input
@@ -94,7 +98,7 @@ public class Main {
     //need to access the main arraylist of books or borrowers for save/load!
     //before this will work
     //also, maybe have a choice to save/load Borrowers OR Books. Currently it does both.
-    static void AlterFiles() {//user choice to access or save file
+    static void AlterFiles(LibraryService ls) {//user choice to access or save file
         Scanner keyboard = new Scanner(System.in);
 
         FileHandler fh = new FileHandler(); //needed to reference non-static context
@@ -113,10 +117,12 @@ public class Main {
                     return;
                 } //just exit
                 case 1 -> {//Save
-                    fh.saveBooks(books);
-                    fh.saveBorrowers(borrowers);
+                    System.out.println("SAVING...");
+                    fh.saveBooks(ls.getBooks());
+                    fh.saveBorrowers(ls.getBorrowers());
                 }
                 case 2 -> {//Load
+                    System.out.println("LOADING...");
                     fh.loadBooks();
                     fh.loadBorrowers();
                 }
@@ -127,58 +133,22 @@ public class Main {
         } while (!(exit == 0)); //repeat this until user enters '0' to exit
     }//end ALTERFILES
 
-    //INCOMPLETE//
-    //need to access main arraylist to search for books... I think.
-    //also need three different search algorithms for title, author, & genre... maybe
-    //also some way to avoid "EXACT REQUIREMENTS" for searching...
-    //maybe add some extra validation for keywords
-    static void SearchBooks() {//user choice to search Books by title, author, genre
-        Scanner keyboard = new Scanner(System.in);
-
-        LibraryService ls = new LibraryService(); //needed to reference non-static context
+    //should function//
+    static void SearchBooksMenu(LibraryService ls) {//user choice to search Books by title, author, genre
         
+        Scanner keyboard = new Scanner(System.in);
         System.out.print("Please enter the keyword(s) you're searching for: ");
         String keyword = keyboard.nextLine();
 
-        int exit = -1; //exit when user says to
-        do {
-            System.out.println("You're looking for: '" + keyword + "'");
-            System.out.println("\nAre you searching for a book title, author, or genre?");
-            System.out.println("0 - Return to Menu\n"
-                    + "1 - Search by Title\n"
-                    + "2 - Search by Author\n"
-                    + "3 - Search by Genre\n");
-            exit = keyboard.nextInt();
-
-            //case for each possible input
-            switch (exit) {
-                case 0 -> {
-                    return;
-                } //just exit
-                case 1 -> {//Title
-                    ls.searchBooks(keyword);
-                }
-                case 2 -> {//Author
-                    ls.searchBooks(keyword);
-                }
-                case 3 -> {//Genre
-                    ls.searchBooks(keyword);
-                }
-                default -> { //default is essentially for invalid input
-                    System.out.println("INVALID INPUT. Please enter an integer from 0-3 (inclusive)");
-                }
-            }// end switch statement
-        } while (!(exit == 0)); //repeat this until user enters '0' to exit
+        ls.searchBooks(keyword); //searches and displays found books, if any
+        
     }//end SEARCHBOOKS
 
     //INCOMPLETE//
     //This method needs to find a borrower, then an existing book,
     //then update the library's and the borrower's books...
-    static void BorrowedBooks() {//user choice to borrow OR return borrowed books
+    static void BorrowedBooks(LibraryService ls) {//user choice to borrow OR return borrowed books
         Scanner keyboard = new Scanner(System.in);
-
-        LibraryService ls = new LibraryService(); //needed to reference non-static context
-
         int exit = -1; //exit when user says to
         do {
             System.out.println("\nWould you like Borrow or Return a book?");
@@ -192,11 +162,13 @@ public class Main {
                 case 0 -> {
                     return;
                 } //just exit
-                case 1 -> {//Add borrower
-                    ls.borrowBook();
+                case 1 -> {//borrow a book
+                    System.out.println("BORROWING...");
+                    //ls.borrowBook();
                 }
-                case 2 -> {//edit borrower
-                    ls.returnBook();
+                case 2 -> {//return a book
+                    System.out.println("RETURNING...");
+                    //ls.returnBook();
                 }
                 default -> { //default is essentially for invalid input
                     System.out.println("INVALID INPUT. Please enter an integer from 0-2 (inclusive)");
@@ -205,11 +177,8 @@ public class Main {
         } while (!(exit == 0)); //repeat this until user enters '0' to exit
     }//end BORROWEDBOOKS
 
-    static void AlterBorrower() {//user choice to add, edit, or delete borrowers
+    static void AlterBorrower(LibraryService ls) {//user choice to add, edit, or delete borrowers
         Scanner keyboard = new Scanner(System.in);
-
-        LibraryService ls = new LibraryService(); //needed to reference non-static context
-
         int exit = -1; //exit when user says to
         do {
             System.out.println("\nWould you like to add, edit, or delete a borrower?");
@@ -225,12 +194,15 @@ public class Main {
                     return;
                 } //just exit
                 case 1 -> {//Add borrower
+                    System.out.println("ADDING BORROWER...");
                     ls.addBorrower();
                 }
                 case 2 -> {//edit borrower
+                    System.out.println("EDITING BORROWER...");
                     ls.editBorrower();
                 }
                 case 3 -> {//delete borrower
+                    System.out.println("DELETING BORROWER...");
                     ls.deleteBorrower();
                 }
                 default -> {//default is essentially for invalid input
