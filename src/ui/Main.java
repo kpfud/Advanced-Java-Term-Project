@@ -1,61 +1,66 @@
-//imports 
-//apparently, imports in the same package don't need to be imported for other classes...?
-//That's what I read but idk. Doesn't seem to work for me.
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InputMismatchException {
         System.out.println("LIBRARY MANAGEMENT SYSTEM");
-        LibraryService libServe = new LibraryService(); //our library service
+
+        //testing things
+        LibraryService libServe = new LibraryService(); //one library service
         //contains books and borrowers
         //will be used throughout system
 
         //user input stuff
         Scanner keyboard = new Scanner(System.in);
         int exit = -1; //exit when user says to
-        do {
-            System.out.println("\n\f\nEnter a number to select from the menu.");
-            System.out.println("0 - Exit Program\n"
-                    + "1 - Add or Edit a Book\n"
-                    + "2 - Access or Save to File\n"
-                    + "3 - Search For Books\n"
-                    + "4 - Borrow or Return Books\n"
-                    + "5 - Register, Update, or Delete Borrowers");
-            exit = keyboard.nextInt();
+            try {
+            do {
+                System.out.println("\n\f\nEnter a number to select from the menu.");
+                System.out.println("0 - Exit Program\n"
+                        + "1 - Add or Edit a Book\n"
+                        + "2 - Access or Save to File\n"
+                        + "3 - Search For Books\n"
+                        + "4 - Borrow or Return Books\n"
+                        + "5 - Register, Update, or Delete Borrowers");
+                exit = keyboard.nextInt();
 
-            //case for each possible input
-            switch (exit) {
-                case 0 -> {
-                    System.out.println("EXITING...");
-                    break;
-                } //just exit
-                case 1 -> {//Add or edit books, call method to get user choices
-                    System.out.println("YOU CHOSE TO ADD/EDIT BOOKS...");
-                    AlterBooks(libServe);
-                }
-                case 2 -> {//access or save to file, once again, get user choice
-                    System.out.println("YOU CHOSE TO LOAD/SAVE FILES...");
-                    AlterFiles(libServe);
-                }
-                case 3 -> {//search books by title, author, or genre, easiest to get user choice and then search
-                    System.out.println("YOU CHOSE TO SEARCH BOOKS...");
-                    SearchBooksMenu(libServe);
-                }
-                case 4 -> {//borrow or return books for borrowers
-                    System.out.println("YOU CHOSE TO BORROW/RETURN BOOKS...");
-                    BorrowedBooks(libServe);
-                }
-                case 5 -> {//manipulate the list of borrowers
-                    System.out.println("YOU CHOSE TO ADD/EDIT BORROWERS...");
-                    AlterBorrower(libServe);
-                }
-                default -> //default is essentially for invalid input
-                    System.out.println("INVALID INPUT. Please enter an integer from 0-5 (inclusive)");
-            }// end switch statement
-        } while (!(exit == 0)); //repeat this until user enters '0' to exit
+                //case for each possible input
+                switch (exit) {
+                    case 0 -> {
+                        System.out.println("EXITING...");
+                        break;
+                    } //just exit
+                    case 1 -> {//Add or edit books, call method to get user choices
+                        System.out.println("YOU CHOSE TO ADD/EDIT BOOKS...");
+                        AlterBooks(libServe);
+                    }
+                    case 2 -> {//access or save to file, once again, get user choice
+                        System.out.println("YOU CHOSE TO LOAD/SAVE FILES...");
+                        AlterFiles(libServe);
+                    }
+                    case 3 -> {//search books by title, author, or genre, easiest to get user choice and then search
+                        System.out.println("YOU CHOSE TO SEARCH BOOKS...");
+                        SearchBooksMenu(libServe);
+                    }
+                    case 4 -> {//borrow or return books for borrowers
+                        System.out.println("YOU CHOSE TO BORROW/RETURN BOOKS...");
+                        BorrowedBooks(libServe);
+                    }
+                    case 5 -> {//manipulate the list of borrowers
+                        System.out.println("YOU CHOSE TO ADD/EDIT BORROWERS...");
+                        AlterBorrower(libServe);
+                    }
+                    default -> //default is essentially for invalid input
+                        System.out.println("INVALID INPUT. Please enter an integer from 0-5 (inclusive)");
+                }// end switch statement
+            } while (!(exit == 0)); //repeat this until user enters '0' to exit
+        } 
+        catch (InputMismatchException e) { //catch any errors
+            System.out.println("BAD INPUT");
+        }
     }
 
     //should function//
@@ -108,7 +113,7 @@ public class Main {
             System.out.println("\nWould you like to save to or load from a file?");
             System.out.println("0 - Return to Menu\n"
                     + "1 - Save to File\n"
-                    + "2 - Load to File\n");
+                    + "2 - Load from File\n");
             exit = keyboard.nextInt();
 
             //case for each possible input
@@ -123,8 +128,8 @@ public class Main {
                 }
                 case 2 -> {//Load
                     System.out.println("LOADING...");
-                    fh.loadBooks();
-                    fh.loadBorrowers();
+                    fh.loadBooks(ls.getBooks());
+                    fh.loadBorrowers(ls.getBooks());
                 }
                 default -> { //default is essentially for invalid input
                     System.out.println("INVALID INPUT. Please enter an integer from 0-2 (inclusive)");
@@ -164,11 +169,11 @@ public class Main {
                 } //just exit
                 case 1 -> {//borrow a book
                     System.out.println("BORROWING...");
-                    //ls.borrowBook();
+                    ls.borrowBook();
                 }
                 case 2 -> {//return a book
                     System.out.println("RETURNING...");
-                    //ls.returnBook();
+                    ls.returnBook();
                 }
                 default -> { //default is essentially for invalid input
                     System.out.println("INVALID INPUT. Please enter an integer from 0-2 (inclusive)");
