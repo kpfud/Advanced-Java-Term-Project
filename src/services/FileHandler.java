@@ -1,3 +1,4 @@
+//imports
 package services;
 
 import models.Book;
@@ -24,7 +25,7 @@ public class FileHandler {
                     book.getTitle(),
                     book.getAuthor(),
                     book.getGenre(),
-                    String.valueOf(book.isAvailable())
+                    String.valueOf(book.availableStatus())
                 );
                 writer.write(line);
                 writer.newLine();
@@ -65,8 +66,7 @@ public class FileHandler {
     }
 
     //---- Load methods ----
-    public List<Book> loadBooks() {
-        List<Book> books = new ArrayList<>();
+    public List<Book> loadBooks(List<Book> books) {
         
         try (BufferedReader reader = new BufferedReader(new FileReader(BOOK_FILE))) {
             String line;
