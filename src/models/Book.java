@@ -14,6 +14,15 @@ public class Book {
         this.genre = genre;
         this.isAvailable = true; // Default to available
     }
+    
+    //file reading
+    public Book(String id, String title, String author, String genre, boolean avail) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.isAvailable = avail; //take whatever value
+    }
 
     //Getters
     public String getID() {
