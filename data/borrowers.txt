@@ -1,0 +1,10 @@
+P001~Katelyn Pfundstein~kc0114@gmail.com~1234567~B001, B005
+P002~James Carter~jcarter22@yahoo.com~5551234~B003
+P003~Emily Nguyen~emily.n@gmail.com~7896541~B002, B004, B007
+P004~Michael Johnson~mikej@hotmail.com~3219870~B006
+P005~Sophia Patel~sophia.patel@outlook.com~4561239~B008, B010
+P006~Daniel Kim~daniel.kim@gmail.com~6547892~B005
+P007~Ava Thompson~ava_t@yahoo.com~8529637~B001, B009
+P008~Liam Wright~liamwright@gmail.com~7412589~B007
+P009~Olivia Baker~olivia.baker@aol.com~9638521~B002, B003
+P010~Noah Rivera~noahrivera@yahoo.com~1478523~B004, B006, B009
