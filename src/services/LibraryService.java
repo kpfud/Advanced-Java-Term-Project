@@ -68,21 +68,21 @@ public class LibraryService {
             return;
         }
 
-        System.out.println("Editing Book: " + bookToEdit.getTitle());
+        System.out.println("Editing Book: " + bookToEdit);
 
-        System.out.print("Enter new title (leave blank to keep current): ");
+        System.out.print("Enter new title (leave blank to keep as '" + bookToEdit.getTitle() + "'): ");
         String newTitle = keyboard.nextLine().trim();
         if (!newTitle.isEmpty()) {
             bookToEdit.setTitle(newTitle);
         }
 
-        System.out.print("Enter new author (leave blank to keep current): ");
+        System.out.print("Enter new author (leave blank to keep as '" + bookToEdit.getAuthor() + "'): ");
         String newAuthor = keyboard.nextLine().trim();
         if (!newAuthor.isEmpty()) {
             bookToEdit.setAuthor(newAuthor);
         }
 
-        System.out.print("Enter new genre (leave blank to keep current: )");
+        System.out.print("Enter new genre (leave blank to keep as '" + bookToEdit.getGenre() + "'): ");
         String newGenre = keyboard.nextLine().trim();
         if (!newGenre.isEmpty()) {
             bookToEdit.setGenre(newGenre);
