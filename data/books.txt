@@ -1,1 +1,10 @@
-B001~see spot run~joe~kids~true
+B001~The Forgotten Realms~R.A. Salvatore~Fantasy~true
+B002~Into the Deep~Samantha Grey~Mystery~false
+B003~Robot Dreams~Isaac Asimov~Sci-Fi~true
+B004~Sunrise Over Amherst~Linda Cole~Romance~true
+B005~The Art of Coding~Jason Wu~Non-Fiction~false
+B006~Whispers in the Woods~Emily Hart~Horror~true
+B007~Secrets of the Sands~Michael Ray~Adventure~false
+B008~Painted Skies~Nora Willis~Drama~true
+B009~The Last Experiment~Karen Brooks~Thriller~true
+B010~Fractured Reality~Daniel Cho~Sci-Fi~false
