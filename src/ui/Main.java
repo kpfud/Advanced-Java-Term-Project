@@ -1,7 +1,7 @@
 package ui;
 
-import services.LibraryService;
-import services.FileHandler;
+import models.*;
+import services.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,25 +13,16 @@ public class Main {
     public static void main(String[] args) throws InputMismatchException {
         System.out.println("LIBRARY MANAGEMENT SYSTEM");
 
-        //testing things
         LibraryService libServe = new LibraryService(); //one library service
         //contains books and borrowers
         //will be used throughout system
 
-        //user input stuff
-        Scanner keyboard = new Scanner(System.in);
+        
         int exit = -1; //exit when user says to
-            try {
+            
             do {
-                System.out.println("\n\f\nEnter a number to select from the menu.");
-                System.out.println("0 - Exit Program\n"
-                        + "1 - Add or Edit a Book\n"
-                        + "2 - Access or Save to File\n"
-                        + "3 - Search For Books\n"
-                        + "4 - Borrow or Return Books\n"
-                        + "5 - Register, Update, or Delete Borrowers");
-                exit = keyboard.nextInt();
-
+                try { //try-catch errors in the menu  
+                exit = mainMenu();
                 //case for each possible input
                 switch (exit) {
                     case 0 -> {
@@ -61,14 +52,30 @@ public class Main {
                     default -> //default is essentially for invalid input
                         System.out.println("INVALID INPUT. Please enter an integer from 0-5 (inclusive)");
                 }// end switch statement
+            } //end try
+            catch (InputMismatchException e) { //catch any errors
+                System.out.println("BAD INPUT, try again");
+                exit = -1; //set value to something else
+            }
             } while (!(exit == 0)); //repeat this until user enters '0' to exit
-        } 
-        catch (InputMismatchException e) { //catch any errors
-            System.out.println("BAD INPUT");
-        }
+        
+    }
+    
+    static int mainMenu(){ //the regular menu that will be used a lot
+                //user input stuff
+                Scanner keyboard = new Scanner(System.in);
+                System.out.println("\n\f\nEnter a number to select from the menu.");
+                System.out.println("0 - Exit Program\n"
+                        + "1 - Add or Edit a Book\n"
+                        + "2 - Access or Save to File\n"
+                        + "3 - Search For Books\n"
+                        + "4 - Borrow or Return Books\n"
+                        + "5 - Register, Update, or Delete Borrowers");
+                int input = keyboard.nextInt();
+
+                return input;
     }
 
-    //should function//
     static void AlterBooks(LibraryService ls) {//user choice to add, edit, or delete book
         Scanner keyboard = new Scanner(System.in);
         int exit = -1; //exit when user says to
@@ -104,10 +111,6 @@ public class Main {
         } while (!(exit == 0)); //repeat this until user enters '0' to exit
     }//end ALTERBOOKS
 
-    //INCOMPLETE//
-    //need to access the main arraylist of books or borrowers for save/load!
-    //before this will work
-    //also, maybe have a choice to save/load Borrowers OR Books. Currently it does both.
     static void AlterFiles(LibraryService ls) {//user choice to access or save file
         Scanner keyboard = new Scanner(System.in);
 
@@ -117,8 +120,8 @@ public class Main {
         do {
             System.out.println("\nWould you like to save to or load from a file?");
             System.out.println("0 - Return to Menu\n"
-                    + "1 - Save to File\n"
-                    + "2 - Load from File\n");
+                    + "1 - Save to File (Saving will overwrite any previous file!)\n"
+                    + "2 - Load from File (Loading will overwrite any previous actions!)\n");
             exit = keyboard.nextInt();
 
             //case for each possible input
@@ -143,7 +146,6 @@ public class Main {
         } while (!(exit == 0)); //repeat this until user enters '0' to exit
     }//end ALTERFILES
 
-    //should function//
     static void SearchBooksMenu(LibraryService ls) {//user choice to search Books by title, author, genre
         
         Scanner keyboard = new Scanner(System.in);
@@ -154,9 +156,6 @@ public class Main {
         
     }//end SEARCHBOOKS
 
-    //INCOMPLETE//
-    //This method needs to find a borrower, then an existing book,
-    //then update the library's and the borrower's books...
     static void BorrowedBooks(LibraryService ls) {//user choice to borrow OR return borrowed books
         Scanner keyboard = new Scanner(System.in);
         int exit = -1; //exit when user says to
