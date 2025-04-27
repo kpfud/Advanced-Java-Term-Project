@@ -11,12 +11,11 @@ public class LibraryService {
     //Assume lists to store current books and borrowers
     private List<Book> books = new ArrayList<>();
     private List<Borrower> borrowers = new ArrayList<>();
-    private int nextBookID = 1;
     static Scanner keyboard = new Scanner(System.in);
 
     private String generateBookID() {
-        return "B" + String.format("%03d", nextBookID++);
-    }
+    return "B" + String.format("%03d", books.size() + 1);
+}
     
     //---- Getters ----
     public List<Book> getBooks() {
