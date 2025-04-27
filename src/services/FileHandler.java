@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileHandler {
-    private static final String BOOK_FILE = "../data/books.txt";
-    private static final String BORROWER_FILE = "../data/borrowers.txt";
+//going to parent directory is unnecessary, apparently
+private static final String BOOK_FILE = "data/books.txt";
+private static final String BORROWER_FILE = "data/borrowers.txt";
 
     //---- Save Methods ----
     public void saveBooks(List<Book> books) {
