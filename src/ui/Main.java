@@ -137,7 +137,7 @@ public class Main {
                 case 2 -> {//Load
                     System.out.println("LOADING...");
                     fh.loadBooks(ls.getBooks());
-                    fh.loadBorrowers(ls.getBooks());
+                    fh.loadBorrowers(ls.getBorrowers(), ls.getBooks());
                 }
                 default -> { //default is essentially for invalid input
                     System.out.println("INVALID INPUT. Please enter an integer from 0-2 (inclusive)");
